@@ -1,0 +1,50 @@
+• Welche URL wird aufgerufen wenn Sie versuchen sich anzumelden?
+  --> http://localhost/webdev-project-viergewinnt/login
+• Welche „Method“ wird im Reiter Network angezeigt?
+  --> GET
+• Welche URL wird aufgerufen wenn Sie versuchen sich zu registrieren?
+  --> wieder /login oder?
+• Welche „Method“ wird im Reiter Network angezeigt?
+  --> POST
+  *** Problem: schwierig zu erfassen, da die Registrierung nur einen Augenblick dauert und danach wieder bei /login mit GET Method ist.
+  *** Lösung: Pause Record Network log --> Pausiert nach der registrierung den Network Log und lässt mich die POST Methode inspizieren
+  *** Edit: Prserve Log löst das Problem
+• Versuchen Sie einen Nutzer mit dem Namen test zu registrieren – wie ist der
+    Response? (Chrome Entwicklertools: Network -> klick bei Name auf login -> Response)
+  --> name=test&pwd=1234567890&pwd2=1234567890&action=register
+  --> name: test
+      pwd: 1234567890
+      pwd2: 1234567890
+      action: register
+• Melden Sie sich an:
+    o Benutzername: test
+    o Passwort: testpassword
+• Legen Sie eine Neue Adresse an – wie ist hier die Method? Wie lautet der Name/aufgerufene URL?
+   --> /api/address
+   --> POST
+• Bearbeiten Sie eine Adresse und klicken Sie auf speichern – wie ist hier die Method?
+    (evtl. Haken bei „Preserve log“ setzen) Wie lautet hier der Name/aufgerufene URL?
+   --> PUT
+   --> /api/address
+• Löschen Sie die neu angelegte Adresse – wie ist hier die Method? Wie lautet
+    hier der Name/aufgerufene URL?
+  --> DELETE
+• Probieren Sie einmal eine eigene Route anzulegen. Beispielsweise, dass Sie
+    eine zusätzliche url für den Login definieren (z.B. /anmelden) – der LoginController soll aber weiterhin verwendet werden.
+    Dies können Sie in der Datei includes/routes.php vornehmen. Rufen Sie anschließend die URL auf.
+    --> $route['/anmelden'] = array('controller' => 'LoginController', 'uniqueName' => 'login');
+    --> funktioniert
+• Sehen Sie sich mal ein paar Views in dem Ordner includes/views an. Werfen
+    Sie insbesondere einen Blick auf die Datei includes/views/parts/header.php
+   --> header.php beinhaltet den header mit der Überschrift "Addressverwaltung" und den Button für Login bzw. Logout
+   --> header.php wird einmal geschrieben und dann in allen anderen views importiert. Somit muss man beim Entwickeln nicht für jede
+       Seite einen eigenen Header schreiben, sondern immer auf den gleichen header verweisen.
+       Vorteil: bei änderungen muss ich nur die header.php Datei bearbeiten.
+• Versuchen Sie nachzuvollziehen wie der View die Daten erhält. Offenbar wird
+    im Controller mittels $this->view->variablenname = "wert“; ein Wert gesetzt.
+    Auf diesen kann dann im view selbst mit $this->variablenname zugegriffen
+    werden
+   --> mit $this werden Variablen vom Controller an die View weitergegeben
+   --> somit kann die View auf den derzeitigen User oder die vorhandenen Addressen zugreifen.
+   --> das ist die Basis von einem MVC: Model enthält/holt die Daten, Controller verarbeitet und stellt sie zur Verfügung und View zeigt sie an
+   --> oder?
